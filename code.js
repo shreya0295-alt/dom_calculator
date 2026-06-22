@@ -21,9 +21,9 @@ button_AC.addEventListener("click", () => {
 let button_DEL=buttons[1];
 button_DEL.addEventListener('click',()=>{
     current =current.slice(0,-1);
+    expression=expression.slice(0,-1);
     console.log('deleate one value->',current);
-    expression+=button_DEL.textContent;
-    display.textContent = expression;
+    display.textContent = expression || "0";
 })
     
 let button_parsent=buttons[2];
