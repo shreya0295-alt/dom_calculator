@@ -7,14 +7,14 @@ let history = document.getElementById("history");
 let display = document.getElementById("display");
 console.log(display);
 let buttons = document.getElementsByClassName("button");
+
 let button_AC =buttons[0];
 button_AC.addEventListener("click", () => {
     total = 0;
     current = "";
     operator = null;
-
+    expression="";
     console.log("All clear ->", total, current, operator);
-    expression+= button_AC.textContent;
     display.textContent = 0;
 });
 
@@ -29,16 +29,25 @@ button_DEL.addEventListener('click',()=>{
 let button_parsent=buttons[2];
 button_parsent.addEventListener('click',()=>{
     total = Number(current);
+    if (current===""&& expression.endsWith(" ")){
+        expression=expression.slice(0,-3);
+    }
     current = "";
     operator = "%";
     console.log("operator ->", operator);
-    display.textContent = total + "%";
+    expression+="%";
+    display.textContent = expression;
 });
 
 let button_devide=buttons[3];
 button_devide.addEventListener('click',()=>{
-    current+=button_devide.textContent;
+    if (current===""&& expression.endsWith(" ")){
+        expression=expression.slice(0,-3);
+    }
+    operator="/";
+    current="";
     console.log('value of currents->',current);
+    expression+="/";
     display.textContent = expression;
 });
 
@@ -75,6 +84,9 @@ button_multiply.addEventListener("click", () => {
         } else if (operator === "*") {
             total *= Number(current);
         }
+    }
+    if (current===""&& expression.endsWith(" ")){
+        expression=expression.slice(0,-3);
     }
     operator = button_multiply.textContent;
     current = "";
@@ -116,6 +128,9 @@ button_minus.addEventListener("click", () => {
             total *= Number(current);
         }
     }
+    if (current===""&& expression.endsWith(" ")){
+        expression=expression.slice(0,-3);
+    }
     operator = button_minus.textContent;
     current = "";
     console.log("Operator ->", operator);
@@ -155,6 +170,9 @@ button_plus.addEventListener("click", () => {
         } else if (operator === "*") {
             total *= Number(current);
         }
+    }
+    if (current===""&& expression.endsWith(" ")){
+        expression=expression.slice(0,-3);
     }
     operator = button_plus.textContent;
     current = "";
